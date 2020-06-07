@@ -7,6 +7,6 @@ import com.amazon.Controller.StoresDetails;
 
 public interface NearByStoreInterface {
 	
-	public List<StoresDetails> getmeStore(ControllerTolibModel model) throws Exception;
+	public List<StoresDetails> getmeStore(ControllerTolibModel model);
 
 }

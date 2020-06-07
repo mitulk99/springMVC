@@ -17,12 +17,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ControllerTolibModel {
 	
-	@NotBlank(message="pincode can't be blank !!!")
+	@NotBlank
 	private String pincode;
+	
+	
 	@NotNull
-	@Min(10)
+	@Min(1)
 	@Max(100)
 	private Double radius;
+	
+	
 	@NotNull
 	private String category;
 }

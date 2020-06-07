@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,19 +17,29 @@ import com.amazon.Controller.StoresDetails;
 import com.amazon.lib.NearByStoreInterface;
 
 
+/*   
+ * 
+ * 
+ * 
+ * 
+ */
+
 @Controller 
 public class StoreController {
 	
 	
-	@Inject
-	private NearByStoreInterface getmestore;
+	private final NearByStoreInterface getmestore;
 	
+	@Inject
+	public StoreController(NearByStoreInterface getmestore) {
+		this.getmestore=getmestore;
+	}
 	
 	
 	@RequestMapping(value = "/nearbystore", method = RequestMethod.GET) 
 	public String display(Model m) 
 	{
-		final ControllerTolibModel userDetails=ControllerTolibModel.builder().build();
+		 final ControllerTolibModel userDetails=ControllerTolibModel.builder().build();
 		
 		m.addAttribute("user", userDetails);
 		
@@ -40,7 +49,7 @@ public class StoreController {
 	
 	
 	@RequestMapping(value="/nearbystore", method=RequestMethod.POST)
-	public String submit( @Valid @ModelAttribute ControllerTolibModel userDetails,BindingResult errors,Model m) throws Exception
+	public String submit(@Valid @ModelAttribute("user") ControllerTolibModel userDetails,BindingResult errors,Model m) 
 	{
 		if(errors.hasErrors())
 			return "formTosubmit";

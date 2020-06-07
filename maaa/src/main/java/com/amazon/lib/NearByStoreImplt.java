@@ -15,7 +15,7 @@ public class NearByStoreImplt implements NearByStoreInterface {
 	@Inject
 	private GetStoreDataInterface getStore;
 	
-	public List<StoresDetails> getmeStore(ControllerTolibModel model) throws Exception {
+	public List<StoresDetails> getmeStore(ControllerTolibModel model) {
 		
 		final PincodeToCoords pincodetocoords=PincodeToCoords.builder()
 				 .pincode(model.getPincode())

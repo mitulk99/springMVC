@@ -26,7 +26,7 @@ import com.amazon.Datastore.LibToDatastoreModel;
 
 public class GetStoreDataESImplt implements GetStoreDataInterface {
 
-	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception {
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) {
 		
 		List<StoresDetails> details= new ArrayList<StoresDetails>();            
 
@@ -38,6 +38,7 @@ public class GetStoreDataESImplt implements GetStoreDataInterface {
 					  .point(User.getLat(),User.getLon())
 					  .distance(User.getRadius(), DistanceUnit.KILOMETERS)
 					  .geoDistance(GeoDistance.ARC));
+			try{
 			searchRequest.source(searchSourceBuilder.sort(SortBuilders.geoDistanceSort("location",User.getLat(),User.getLon()).order(SortOrder.ASC).unit(DistanceUnit.KILOMETERS)));
 			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 			RestStatus status = searchResponse.status();
@@ -50,21 +51,20 @@ public class GetStoreDataESImplt implements GetStoreDataInterface {
 				if(obj1.get("category").equals(User.getCategory()) || User.getCategory().equals("all")==true)
 				{
 					StoresDetails sd=StoresDetails.builder().build();
-					if(obj1.has("merchant name")==true)
 						sd.setMerchantname(obj1.get("merchant name").toString());
-						if(obj1.has("open time")==true)
 						sd.setOpentime(obj1.get("open time").toString());
-						if(obj1.has("close time")==true)
 						sd.setClosetime(obj1.get("close time").toString());
-						if(obj1.has("address")==true)
 						sd.setAddress(obj1.get("address").toString());
-						if(obj1.has("category")==true)
 						sd.setCategory(obj1.get("category").toString());
 						if(obj1.has("home delivery")==true)
 						sd.setRangeofhomedelivery(obj1.get("range of home delivery").toString());
 						sd.setDistance(obj2.getDouble(0));
 						details.add(sd);
 				}
+			}
+			}
+			catch (Exception e) {
+				System.err.println(e);
 			}
 			return details;
 	}

@@ -18,7 +18,8 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 public class GetStoreDataDDBimplt implements GetStoreDataInterface {
 
 	private AmazonDynamoDBClient ddb=null;
-	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception {
+	
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User)  {
 		
 		List<StoresDetails> details= new ArrayList<StoresDetails>(); 
 		

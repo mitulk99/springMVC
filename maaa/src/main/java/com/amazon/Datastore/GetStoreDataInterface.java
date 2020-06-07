@@ -7,6 +7,6 @@ import com.amazon.Datastore.LibToDatastoreModel;
 
 public interface GetStoreDataInterface {
 	
-	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception;
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) ;
 
 }
