@@ -22,7 +22,7 @@ public class GetStoreDataDDBimplt implements GetStoreDataInterface {
 		
 		List<StoresDetails> details= new ArrayList<StoresDetails>(); 
 		
-		AWSCredentials credentials = new BasicAWSCredentials("AKIAXIEUBBVBPS6MXAAY", "P5IQGxYnaLBta+nQmXT5knA0vVFqLgczVfT187/i");
+		AWSCredentials credentials = new BasicAWSCredentials("SECRET_KEY", "SECRET_ACCESS_KEY");
 		 ddb = new AmazonDynamoDBClient(credentials);
 		 
 		 GeoDataManagerConfiguration config = new GeoDataManagerConfiguration(ddb, "geo-test");
