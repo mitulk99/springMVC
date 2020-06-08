@@ -4,6 +4,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,13 +18,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ControllerTolibModel {
 	
-	@NotBlank
+	@NotBlank(message="pincode field cannot be empty !! Please enter Pincode. ")
+	@Size(min=6,max=6,message="Indian pincode should consist of 6 digits!!")
 	private String pincode;
 	
 	
-	@NotNull
-	@Min(1)
-	@Max(100)
+	@NotNull(message="radius field cannot be empty!! Please enter some radius.")
+	@Min(0)
 	private Double radius;
 	
 	

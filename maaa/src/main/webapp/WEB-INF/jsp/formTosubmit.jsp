@@ -3,10 +3,10 @@
 <h2> Enter details here...</h2>
 <body>
 <form:form action="nearbystore" method="post" modelAttribute="user">
-Enter your pincode : <form:input path="pincode"/><br><br>
-
-<form:errors path="pincode"  cssClass="text-danger"/>
-Enter radius in KM : <form:input path="radius"/><br><br>
+Enter your pincode : <form:input path="pincode"/><br>
+		<form:errors path="pincode"  cssClass="text-danger"/><br><br>
+Enter radius in KM : <form:input path="radius"/><br>
+		<form:errors path="radius"  cssClass="text-danger"/><br><br>
 Select category of store : <form:select path="category">
 <form:option value="all" label="all"/>
 <form:option value="grocery" label="grocery"/>

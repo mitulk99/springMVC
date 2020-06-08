@@ -15,24 +15,45 @@ import com.amazonaws.geo.model.QueryRadiusResult;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+/*
+ * GetStoreDataDDBimplt.java
+ * 
+ * in this class, StoresDetails will be retrieved from AWS DDB
+ * with the use of Geo-library of DDb.
+ * 
+ */
 public class GetStoreDataDDBimplt implements GetStoreDataInterface {
 
 	private AmazonDynamoDBClient ddb=null;
 	
-	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User)  {
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception {
 		
-		List<StoresDetails> details= new ArrayList<StoresDetails>(); 
+		List<StoresDetails> details= new ArrayList<StoresDetails>();
 		
+		/*
+		 * Providing IAM role credentials here using AWSCredentials.
+		 */
 		AWSCredentials credentials = new BasicAWSCredentials("SECRET_KEY", "SECRET_ACCESS_KEY");
 		 ddb = new AmazonDynamoDBClient(credentials);
 		 
+		 /*
+		  * GeoDataManagerConfiguration(ddb, "geo-test") will search for "geo-test" table on my AWS account.
+		  */
 		 GeoDataManagerConfiguration config = new GeoDataManagerConfiguration(ddb, "geo-test");
 			GeoDataManager geoDataManager = new GeoDataManager(config);
 			
+			/*
+			 * Here I am setting up centerPoint (user's location)
+			 * and setting radius within which user wants Stores to be retrived.
+			 */
 			GeoPoint centerPoint = new GeoPoint(User.getLat(), User.getLon());
 			QueryRadiusRequest queryRadiusRequest = new QueryRadiusRequest(centerPoint, User.getRadius()*1000);
 	        QueryRadiusResult queryRadiusResult = geoDataManager.queryRadius(queryRadiusRequest);
 	        List<Map<String, AttributeValue>> queryResults = queryRadiusResult.getItem();
+	        
+	        /*
+	         * Parsing data retrived from "geo-test" table to make compatible with StoresDetails Model.
+	         */
 	        for(Map<String, AttributeValue> item : queryResults)
 	        {	
 	        	if(User.getCategory().equals(item.get("category").getS()) || User.getCategory().equals("all"))

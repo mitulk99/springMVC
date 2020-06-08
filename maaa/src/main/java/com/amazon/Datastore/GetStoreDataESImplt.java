@@ -24,26 +24,58 @@ import org.json.JSONObject;
 import com.amazon.Controller.StoresDetails;
 import com.amazon.Datastore.LibToDatastoreModel;
 
-public class GetStoreDataESImplt implements GetStoreDataInterface {
+/*
+ * GetStoreDataESImplt.java
+ * 
+ * in this class, StoresDetails will be retrieved from ElasticSearch
+ * with the use of geo-ditance query.
+ * 
+ */
+public class GetStoreDataESImplt implements GetStoreDataInterface  {
 
-	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) {
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception{
 		
 		List<StoresDetails> details= new ArrayList<StoresDetails>();            
-
+			/*
+			 * Use of RestHighLevelClient to connect our java client with elasticsearch.
+			 * 
+			 * RestHighLevelClient is used instead of ES java API, since ES is planning to deprecate
+			 * ES java API in it's future version.
+			 * 
+			 */
 			RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost",9200, "http")));
 			SearchRequest searchRequest = new SearchRequest("my_locations"); 
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+			
+			/*
+			 * here I am building a geoDistance query.
+			 * 
+			 *  .geoDistanceQuery("location") - it will inject user's "location" in database.
+			 *  								which would be of type geo-point.
+			 *  
+			 *  .point(User.getLat(),User.getLon()) - setting up geo-point --"location" field with user's Lat-Lon.
+			 *  
+			 *  .distance(User.getRadius(), DistanceUnit.KILOMETERS) - search for the Stores within radius given here in KM.
+			 * 
+			 */
 			searchSourceBuilder.query(QueryBuilders
 					  .geoDistanceQuery("location")
 					  .point(User.getLat(),User.getLon())
 					  .distance(User.getRadius(), DistanceUnit.KILOMETERS)
 					  .geoDistance(GeoDistance.ARC));
-			try{
+			
 			searchRequest.source(searchSourceBuilder.sort(SortBuilders.geoDistanceSort("location",User.getLat(),User.getLon()).order(SortOrder.ASC).unit(DistanceUnit.KILOMETERS)));
 			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			/*
+			 * fetching all the hits
+			 */
 			RestStatus status = searchResponse.status();
 			SearchHits hits = searchResponse.getHits();
 			SearchHit[] searchHits = hits.getHits();
+			
+			/*
+			 * parsing fetched Json data to make it compatible with StoresDetails Model.
+			 */
 			for (SearchHit hit : searchHits) {
 				JSONObject obj1= new JSONObject(hit.toString());
 				JSONArray obj2=obj1.getJSONArray("sort");
@@ -61,10 +93,6 @@ public class GetStoreDataESImplt implements GetStoreDataInterface {
 						sd.setDistance(obj2.getDouble(0));
 						details.add(sd);
 				}
-			}
-			}
-			catch (Exception e) {
-				System.err.println(e);
 			}
 			return details;
 	}

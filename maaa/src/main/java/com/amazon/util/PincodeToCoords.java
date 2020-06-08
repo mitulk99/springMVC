@@ -21,9 +21,8 @@ public class PincodeToCoords
 {
 	 private Double lat,lon;
 	 private String pincode;
-	 public void getCoordinates() 
+	 public void getCoordinates() throws Exception
 	 {
-			try{
 				String url = "https://nominatim.openstreetmap.org/search?q=";
 			     URL obj = new URL(url+pincode+"&format=json");
 			     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -44,10 +43,6 @@ public class PincodeToCoords
 			     lat=Double.valueOf(object.getString("lat"));
 			     lon=Double.valueOf(object.getString("lon"));
 			     
-			}
-			catch (Exception e) {
-				System.out.println(e);
-			}
 	}
 
 }

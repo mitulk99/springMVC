@@ -10,12 +10,35 @@ import com.amazon.Datastore.GetStoreDataInterface;
 import com.amazon.Controller.StoresDetails;
 import com.amazon.util.PincodeToCoords;
 
+
+/*
+ * NearByStoreImplt.java
+ * 
+ * This class implements NearByStoreInterface
+ * It uses @param PincodeToCoords to convert pincode to coordinates
+ */
 public class NearByStoreImplt implements NearByStoreInterface {
 	
-	@Inject
 	private GetStoreDataInterface getStore;
 	
-	public List<StoresDetails> getmeStore(ControllerTolibModel model) {
+	 public NearByStoreImplt() {}
+	 
+	 /*
+	  * Constructor Injection used to make class requirements clear.
+	  */
+	@Inject
+	public NearByStoreImplt(GetStoreDataInterface getStore)
+	{
+		this.getStore=getStore;
+	}
+	
+	/*
+	 * As you can see here,
+	 * ControllerTolibModel is being converted to LibToDatastoreModel.
+	 * 
+	 * @return List<StoresDetails> - It will return list of all the stores.
+	 */
+	public List<StoresDetails> getmeStore(ControllerTolibModel model) throws Exception {
 		
 		final PincodeToCoords pincodetocoords=PincodeToCoords.builder()
 				 .pincode(model.getPincode())
