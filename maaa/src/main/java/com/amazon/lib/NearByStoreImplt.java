@@ -19,18 +19,8 @@ import com.amazon.util.PincodeToCoords;
  */
 public class NearByStoreImplt implements NearByStoreInterface {
 	
-	private GetStoreDataInterface getStore;
-	
-	 public NearByStoreImplt() {}
-	 
-	 /*
-	  * Constructor Injection used to make class requirements clear.
-	  */
 	@Inject
-	public NearByStoreImplt(GetStoreDataInterface getStore)
-	{
-		this.getStore=getStore;
-	}
+	private GetStoreDataInterface getStore;
 	
 	/*
 	 * As you can see here,
