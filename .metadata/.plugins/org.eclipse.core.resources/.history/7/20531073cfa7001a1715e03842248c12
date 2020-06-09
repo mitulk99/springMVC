@@ -1,9 +1,0 @@
-package com.amazon.Datastore;
-
-import java.util.List;
-
-public interface GetStoreDataInterface {
-	
-	public List<StoresDetails> nearbystoredata(UserRequirements User) throws Exception;
-
-}

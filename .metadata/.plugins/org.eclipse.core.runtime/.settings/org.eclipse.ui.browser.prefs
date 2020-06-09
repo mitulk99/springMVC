@@ -1,4 +1,0 @@
-browser-choice=1
-browsers=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<web-browsers current\="3">\r\n<system/>\r\n<external location\="C\:\\Program Files\\Mozilla Firefox\\firefox.exe" name\="Firefox"/>\r\n<external location\="C\:\\Program Files\\Internet Explorer\\iexplore.exe" name\="Internet Explorer"/>\r\n<external location\="C\:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe" name\="Chrome"/>\r\n</web-browsers>
-eclipse.preferences.version=1
-internalWebBrowserHistory=http\://localhost\:8080/DemoMVC/add?t1\=5&t2\=6|*|http\://localhost\:8080/DemoMVC/index.jsp|*|http\://localhost\:8080/DemoMVC/WEB-INF/web.xml|*|http\://localhost\:8080/DemoMVC/add?t1\=7&t2\=8|*|http\://localhost\:8080/DemoMVC/add?t1\=7&t2\=6|*|

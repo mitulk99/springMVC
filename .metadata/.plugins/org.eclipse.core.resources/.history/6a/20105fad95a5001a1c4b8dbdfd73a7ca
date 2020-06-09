@@ -1,6 +1,0 @@
-<html>
-<h1>Ooops !!! No Stores within the range !!</h1>
-<body>
-<jsp:include page="/WEB-INF/jsp/viewpage.jsp"></jsp:include>  
-</body>
-</html>
