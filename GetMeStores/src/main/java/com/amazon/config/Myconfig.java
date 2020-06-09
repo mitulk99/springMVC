@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.amazon.lib.NearByStore;
 import com.amazon.lib.NearByStoreImplementation;
+import com.amazon.util.DatabaseFactory;
 import com.amazon.Datastore.GetStoreDataDDB;
 import com.amazon.Datastore.GetStoreDataES;
 import com.amazon.Datastore.GetStoreData;
@@ -31,5 +32,11 @@ public class Myconfig {
 	public GetStoreData getstoreimplt()
 	{
 		return new GetStoreDataES();
+	}
+	
+	@Bean
+	public DatabaseFactory getdatabse()
+	{
+		return new DatabaseFactory();
 	}
 }

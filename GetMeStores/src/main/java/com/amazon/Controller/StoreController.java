@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.amazon.Controller.StoresDetails;
 import com.amazon.lib.NearByStore;
 import com.amazon.lib.NearByStoreM;
+import com.amazon.util.Constants;
 
 
 
@@ -57,7 +58,7 @@ public class StoreController {
 	 * 
 	 * @author mitkh
 	 */
-	@RequestMapping(value = "/nearbystore", method = RequestMethod.GET) 
+	@RequestMapping(value =Constants.UI_GetMeStores, method = RequestMethod.GET) 
 	public String display(Model m) 
 	{
 		 final NearByStoreM userDetails=NearByStoreM.builder().build();
@@ -79,7 +80,7 @@ public class StoreController {
 	 * @author mitkh
 	 * 
 	 */
-	@RequestMapping(value="/nearbystore", method=RequestMethod.POST)
+	@RequestMapping(value=Constants.UI_GetMeStores, method=RequestMethod.POST)
 	public String submit(@Valid @ModelAttribute("user") NearByStoreM userDetails,BindingResult errors,Model m) throws Exception 
 	{
 		if(errors.hasErrors())

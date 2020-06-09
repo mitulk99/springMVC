@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import com.amazon.Datastore.GetStoreData;
 import com.amazon.Datastore.GetStoreDataM;
 import com.amazon.Controller.StoresDetails;
+import com.amazon.util.DatabaseFactory;
 import com.amazon.util.PincodeToCoords;
 
 
@@ -18,8 +19,13 @@ import com.amazon.util.PincodeToCoords;
  */
 public class NearByStoreImplementation implements NearByStore {
 	
-	@Inject
-	private GetStoreData getStore;
+	DatabaseFactory factory=new DatabaseFactory();
+	
+	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
+	GetStoreData getStore=factory.getInstance("ES");
+	
+//	@Inject
+//	GetStoreData getStore;
 	
 	/*
 	 * As you can see here,
