@@ -1,0 +1,8 @@
+<html>  
+<body>  
+Ooops!! Details have not been entered correctly <br><br>
+
+<jsp:include page="/index.jsp"></jsp:include> 
+ And enter details correctly !!
+</body>  
+</html>

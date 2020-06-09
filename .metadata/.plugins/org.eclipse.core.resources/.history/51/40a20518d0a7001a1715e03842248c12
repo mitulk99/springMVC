@@ -1,0 +1,42 @@
+package com.amazon.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.amazon.lib.Back;
+import com.amazon.lib.Coordinates;
+import com.amazon.lib.Elasticsearch;
+import com.amazon.lib.NearByStoreImplt;
+import com.amazon.lib.NearByStoreInterface;
+import com.amazon.Datastore.StoresDetails;
+import com.amazon.Datastore.UserRequirements;
+
+@Configuration
+@ComponentScan({ "com.amazon.*" })
+public class Myconfig {
+	
+	@Bean
+	public Coordinates getcoords()
+	{
+		return new Coordinates();
+	}
+	
+	@Bean
+	public UserRequirements getUser()
+	{
+		return new UserRequirements();
+	}
+	
+	@Bean
+	public StoresDetails getDetails()
+	{
+		return new StoresDetails();
+	}
+	
+	@Bean
+	public NearByStoreInterface getimplt()
+	{
+		return new NearByStoreImplt();
+	}
+}

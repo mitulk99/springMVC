@@ -1,0 +1,7 @@
+<html>
+<h1>Ooops !!! No Stores within the range !!</h1>
+<body>
+Re-enter your details...
+<jsp:include page="/index.jsp"></jsp:include>  
+</body>
+</html>

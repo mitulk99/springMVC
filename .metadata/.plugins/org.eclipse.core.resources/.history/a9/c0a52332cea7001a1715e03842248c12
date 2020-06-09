@@ -1,0 +1,13 @@
+package com.amazon.lib;
+
+import java.util.List;
+
+import com.amazon.Controller.ControllerToDatastoreModel;
+import com.amazon.Datastore.StoresDetails;
+import com.amazon.Datastore.UserRequirements;
+
+public interface NearByStoreInterface {
+	
+	public List<StoresDetails> getmeStore(ControllerToDatastoreModel model) throws Exception;
+
+}

@@ -1,0 +1,35 @@
+package com.amazon.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.amazon.lib.NearByStore;
+import com.amazon.lib.NearByStoreImplementation;
+import com.amazon.Datastore.GetStoreDataDDBimplt;
+import com.amazon.Datastore.GetStoreDataESImplt;
+import com.amazon.Datastore.GetStoreDataInterface;
+
+@Configuration
+@ComponentScan({ "com.amazon.*" })
+public class Myconfig {
+	
+	
+	@Bean
+	public NearByStore getimplt()
+	{
+		return new NearByStoreImplementation();
+	}
+	
+//	@Bean
+//	public GetStoreDataInterface getstoreimplt()
+//	{
+//		return new GetStoreDataDDBimplt();
+//	}
+	
+	@Bean
+	public GetStoreDataInterface getstoreimplt()
+	{
+		return new GetStoreDataESImplt();
+	}
+}

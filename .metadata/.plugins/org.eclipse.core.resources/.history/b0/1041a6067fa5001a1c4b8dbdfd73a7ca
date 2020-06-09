@@ -1,0 +1,25 @@
+package com.amazon.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.amazon.util.Backend;
+import com.amazon.util.Coordinates;
+
+@Configuration
+@ComponentScan({ "com.amazon" })
+public class Myconfig {
+
+	@Bean
+	public Backend getbackend()
+	{
+		return new Backend();
+	}
+	
+	@Bean
+	public Coordinates getcoords()
+	{
+		return new Coordinates();
+	}
+}

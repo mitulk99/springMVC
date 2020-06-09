@@ -1,0 +1,12 @@
+package com.amazon.Datastore;
+
+import java.util.List;
+
+public class GetStoreDataESImplt implements GetStoreDataInterface {
+
+	public List<StoresDetails> nearbystoredata(UserRequirements User) throws Exception {
+		
+		return null;
+	}
+
+}

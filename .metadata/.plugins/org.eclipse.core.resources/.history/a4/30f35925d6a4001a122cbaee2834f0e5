@@ -1,0 +1,5 @@
+package com.amazon.config;
+
+public class Myconfig {
+
+}

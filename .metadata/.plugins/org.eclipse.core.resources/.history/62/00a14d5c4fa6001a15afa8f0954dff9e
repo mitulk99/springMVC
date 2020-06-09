@@ -1,0 +1,18 @@
+package com.amazon.util;
+
+import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+
+
+@Getter
+public class UserRequirements {
+	
+	private String pincode;
+	private String radius;
+	private String category;
+	
+	
+	
+
+}

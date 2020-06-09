@@ -1,0 +1,22 @@
+<%@ page isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html>  
+<h2>Stores Retrieved.......</h2>
+<body>  
+<ol>
+		<c:forEach var="sd" items="${details}">
+		
+			<li>
+			Merchant name : ${sd.merchantname}
+			Open time : ${sd.opentime}
+			Close time : ${sd.closetime}
+			Address : ${sd.address}
+			Range of home delivery : ${sd.rangeofhomedelivery} KM
+			Distance (from here) : ${sd.distance}
+			Category : ${sd.category}
+			</li>
+			
+		</c:forEach>
+	</ol>
+</body>  
+</html>  

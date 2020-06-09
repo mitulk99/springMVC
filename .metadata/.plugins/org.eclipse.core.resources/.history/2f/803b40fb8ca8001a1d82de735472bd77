@@ -1,0 +1,14 @@
+package com.amazon.Datastore;
+
+import java.util.List;
+
+import com.amazon.Controller.StoresDetails;
+
+public class GetStoreDataDDBimplt implements GetStoreDataInterface {
+
+	public List<StoresDetails> nearbystoredata(LibToDatastoreModel User) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

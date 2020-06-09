@@ -1,0 +1,12 @@
+package com.amazon.lib;
+
+import java.util.List;
+
+import com.amazon.Datastore.StoresDetails;
+import com.amazon.Datastore.UserRequirements;
+
+public interface GetmeStoreInterface {
+	
+	public List<StoresDetails> Backend(UserRequirements User) throws Exception;
+
+}

@@ -1,0 +1,12 @@
+package com.amazon.util;
+
+import java.util.List;
+
+public class Elasticsearch implements Back {
+
+	public List<StoresDetails> Backend(String pincode, String radius, String category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

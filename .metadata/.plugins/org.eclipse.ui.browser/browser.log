@@ -1,0 +1,10 @@
+
+Jun 02, 2020 14:16:18.03 NEW SESSION
+Jun 02, 2020 14:16:18.03 [25036:9060:0602/141617.248:ERROR:socket_stream.cc(218)] Closing stream with result -2
+Jun 02, 2020 16:09:16.03 [25036:9060:0602/160916.029:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -105
+Jun 02, 2020 16:09:16.44 [25036:9060:0602/160916.445:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -105
+Jun 02, 2020 16:09:29.60 [25036:9060:0602/160929.605:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+Jun 02, 2020 17:45:07.54 [25036:9060:0602/174507.537:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+Jun 02, 2020 17:45:31.62 [25036:9060:0602/174531.627:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+Jun 02, 2020 17:53:01.07 [25036:9060:0602/175301.073:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+Jun 02, 2020 17:53:22.05 [25036:9060:0602/175322.055:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
