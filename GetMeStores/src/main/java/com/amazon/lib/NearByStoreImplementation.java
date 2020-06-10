@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.amazon.Controller.NearByStoreM;
 import com.amazon.Datastore.GetStoreData;
-import com.amazon.Datastore.GetStoreDataM;
-import com.amazon.Controller.StoresDetails;
+import com.amazon.Datastore.StoresDetails;
 import com.amazon.util.DatabaseFactory;
 import com.amazon.util.PincodeToCoords;
 
@@ -19,13 +19,13 @@ import com.amazon.util.PincodeToCoords;
  */
 public class NearByStoreImplementation implements NearByStore {
 	
-	DatabaseFactory factory=new DatabaseFactory();
+//	DatabaseFactory factory=new DatabaseFactory();
+//	
+//	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
+//	GetStoreData getStore=factory.getInstance("ES");
 	
-	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
-	GetStoreData getStore=factory.getInstance("ES");
-	
-//	@Inject
-//	GetStoreData getStore;
+	@Inject
+	GetStoreData getStore;
 	
 	/*
 	 * As you can see here,
@@ -33,7 +33,7 @@ public class NearByStoreImplementation implements NearByStore {
 	 * 
 	 * @return List<StoresDetails> - It will return list of all the stores.
 	 */
-	public List<StoresDetails> getmeStore(NearByStoreM model) throws Exception {
+	public List<StoresDetails> nearbystore(NearByStoreM model) throws Exception {
 		
 		final PincodeToCoords pincodetocoords=PincodeToCoords.builder()
 				 .pincode(model.getPincode())
@@ -48,7 +48,7 @@ public class NearByStoreImplementation implements NearByStore {
 													.category(model.getCategory())
 													.build();
 		
-		List<StoresDetails> storedetails=getStore.nearbystoredata(object);
+		List<StoresDetails> storedetails=getStore.getstoredata(object);
 		
 		return storedetails;
 	}

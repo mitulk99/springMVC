@@ -1,5 +1,6 @@
 package com.amazon.Controller;
 
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,11 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-import com.amazon.Controller.StoresDetails;
+import com.amazon.Datastore.StoresDetails;
 import com.amazon.lib.NearByStore;
-import com.amazon.lib.NearByStoreM;
 import com.amazon.util.Constants;
+import com.amazon.util.DatabaseFactory;
 
 
 
@@ -24,26 +24,23 @@ import com.amazon.util.Constants;
  * <h1>Store Controller</h1>
  * It's a front Controller for our Spring MVC app.
  * 
- * 
- * @author mitkh
- * 
  */
 
 @Controller 
 public class StoreController {
 	
 	
-	private final NearByStore getmestore;
+	private final NearByStore nearbystore;
 	
 	
 	/*
 	 * Constructor Injection used to make requirements of Controller clear.
-	 * 
-	 * @author mitkh
 	 */
+	
+	
 	@Inject
-	public StoreController(NearByStore getmestore) {
-		this.getmestore=getmestore;
+	public StoreController(final NearByStore nearbystore) {
+		this.nearbystore=nearbystore;
 	}
 	
 	/*
@@ -55,8 +52,6 @@ public class StoreController {
 	 * @param ControllerTolibModel is being binded to model.
 	 * 
 	 * @return "formTosubmit" will take you to form page
-	 * 
-	 * @author mitkh
 	 */
 	@RequestMapping(value =Constants.UI_GetMeStores, method = RequestMethod.GET) 
 	public String display(Model m) 
@@ -65,7 +60,7 @@ public class StoreController {
 		
 		m.addAttribute("user", userDetails);
 		
-		return "formTosubmit";
+		return "nearbystore_form";
 	}
 	
 	
@@ -77,16 +72,14 @@ public class StoreController {
 	 * 
 	 * else proceed further to retrive storeDetails from the database.
 	 * 
-	 * @author mitkh
-	 * 
 	 */
 	@RequestMapping(value=Constants.UI_GetMeStores, method=RequestMethod.POST)
-	public String submit(@Valid @ModelAttribute("user") NearByStoreM userDetails,BindingResult errors,Model m) throws Exception 
+	public String submit(@Valid @ModelAttribute final NearByStoreM userDetails,BindingResult errors,Model m) throws Exception 
 	{
 		if(errors.hasErrors())
-			return "formTosubmit";
+			return "nearbystore_form";
 		
-		final List<StoresDetails> storedetails=getmestore.getmeStore(userDetails);
+		final List<StoresDetails> storedetails=nearbystore.nearbystore(userDetails);
 		
 		/*
 		 * if no stores retrieved, then @return "nostores" - It will dispaly a message saying "no stores within range provided"

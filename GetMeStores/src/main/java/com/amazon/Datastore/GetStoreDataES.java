@@ -3,6 +3,8 @@ package com.amazon.Datastore;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -21,7 +23,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.amazon.Controller.StoresDetails;
+import com.amazon.lib.GetStoreDataM;
 
 /*
  * GetStoreDataES.java
@@ -32,9 +34,18 @@ import com.amazon.Controller.StoresDetails;
  */
 public class GetStoreDataES implements GetStoreData  {
 
-	public List<StoresDetails> nearbystoredata(GetStoreDataM User) throws Exception{
+	@Inject
+	private RestHighLevelClient client;
+	
+	@Inject
+	private SearchSourceBuilder searchSourceBuilder;
+	
+	
+	public List<StoresDetails> getstoredata(final GetStoreDataM User) throws Exception{
 		
-		List<StoresDetails> details= new ArrayList<StoresDetails>();            
+		
+		List<StoresDetails> details= new ArrayList<StoresDetails>();   
+		
 			/*
 			 * Use of RestHighLevelClient to connect our java client with elasticsearch.
 			 * 
@@ -42,9 +53,10 @@ public class GetStoreDataES implements GetStoreData  {
 			 * ES java API in it's future version.
 			 * 
 			 */
-			RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost",9200, "http")));
+		
+			
 			SearchRequest searchRequest = new SearchRequest("my_locations"); 
-			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+			
 			
 			/*
 			 * here I am building a geoDistance query.
@@ -57,14 +69,19 @@ public class GetStoreDataES implements GetStoreData  {
 			 *  .distance(User.getRadius(), DistanceUnit.KILOMETERS) - search for the Stores within radius given here in KM.
 			 * 
 			 */
+			//System.out.println("hello");
 			searchSourceBuilder.query(QueryBuilders
 					  .geoDistanceQuery("location")
 					  .point(User.getLat(),User.getLon())
 					  .distance(User.getRadius(), DistanceUnit.KILOMETERS)
 					  .geoDistance(GeoDistance.ARC));
 			
+			/*
+			 * This particular line of code is for sorting Stores based on distance from CenterPoint.
+			 */
 			searchRequest.source(searchSourceBuilder.sort(SortBuilders.geoDistanceSort("location",User.getLat(),User.getLon()).order(SortOrder.ASC).unit(DistanceUnit.KILOMETERS)));
 			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			
 			/*
 			 * fetching all the hits
 			 */

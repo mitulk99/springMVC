@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.amazon.Controller.StoresDetails;
+import javax.inject.Inject;
+
+import com.amazon.lib.GetStoreDataM;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.geo.GeoDataManager;
@@ -23,18 +25,20 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
  * 
  */
 public class GetStoreDataDDB implements GetStoreData {
-
-	private AmazonDynamoDBClient ddb=null;
 	
-	public List<StoresDetails> nearbystoredata(GetStoreDataM User) throws Exception {
+	@Inject
+	private AWSCredentials credentials;
+	
+	@Inject
+	private AmazonDynamoDBClient ddb;
+	
+	public List<StoresDetails> getstoredata(final GetStoreDataM User) throws Exception {
 		
 		List<StoresDetails> details= new ArrayList<StoresDetails>();
 		
 		/*
 		 * Providing IAM role credentials here using AWSCredentials.
 		 */
-		AWSCredentials credentials = new BasicAWSCredentials("SECRET_KEY", "SECRET_ACCESS_KEY");
-		 ddb = new AmazonDynamoDBClient(credentials);
 		 
 		 /*
 		  * GeoDataManagerConfiguration(ddb, "geo-test") will search for "geo-test" table on my AWS account.

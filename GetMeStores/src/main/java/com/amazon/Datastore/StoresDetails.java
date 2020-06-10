@@ -1,4 +1,4 @@
-package com.amazon.Controller;
+package com.amazon.Datastore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

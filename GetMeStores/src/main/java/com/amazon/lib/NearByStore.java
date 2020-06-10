@@ -2,8 +2,8 @@ package com.amazon.lib;
 
 import java.util.List;
 
-
-import com.amazon.Controller.StoresDetails;
+import com.amazon.Controller.NearByStoreM;
+import com.amazon.Datastore.StoresDetails;
 
 /*
  * NearByStore.java
@@ -19,6 +19,6 @@ public interface NearByStore {
 	 * It should convert valid pincode to corresponding lat-long.
 	 * 
 	 */
-	public List<StoresDetails> getmeStore(NearByStoreM model) throws Exception;
+	public List<StoresDetails> nearbystore(final NearByStoreM model) throws Exception;
 
 }

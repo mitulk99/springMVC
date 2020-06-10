@@ -13,7 +13,7 @@ public class Mywebinit extends AbstractAnnotationConfigDispatcherServletInitiali
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] {Myconfig.class};
+		return new Class[] {GetMeStoreConfig.class};
 	}
 
 	@Override

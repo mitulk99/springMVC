@@ -1,4 +1,4 @@
-package com.amazon.lib;
+package com.amazon.Controller;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
