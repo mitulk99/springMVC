@@ -19,18 +19,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NearByStoreM {
-	
-	@NotBlank(message="pincode field cannot be empty !! Please enter Pincode. ")
-	@Size(min=6,max=6,message="Indian pincode should consist of 6 digits!!")
-	@Pattern(regexp="^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$",message="Not a proper pincode pattern. Please enter properly!!")
-	private String pincode;
-	
-	
-	@NotNull(message="radius field cannot be empty!! Please enter some radius.")
-	@Min(0)
-	private Double radius;
-	
-	
-	@NotNull
-	private String category;
+
+    @NotBlank(message = "pincode field cannot be empty !! Please enter Pincode. ")
+    @Size(min = 6, max = 6, message = "Indian pincode should consist of 6 digits!!")
+    @Pattern(regexp = "^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$", message = "Not a proper pincode pattern. Please enter properly!!")
+    private String pincode;
+
+
+    @NotNull(message = "radius field cannot be empty!! Please enter some radius.")
+    @Min(0)
+    private Double radius;
+
+
+    @NotNull
+    private String category;
 }

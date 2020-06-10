@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionhandler {
 
-	private static final Logger logger=LoggerFactory.getLogger(GlobalExceptionhandler.class);
-	
-	@ExceptionHandler(value=Exception.class)
-	public String handleException(HttpServletRequest request, Exception ex)
-	{
-		logger.info("exception occured : " + request.getRequestURL());
-		return "final";
-	}
-	
-	@ExceptionHandler(value=NullPointerException.class)
-	public String handleNull(HttpServletRequest request, Exception ex)
-	{
-		logger.info("exception occured : " + request.getRequestURL());
-		return "NullHandler";
-	}
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionhandler.class);
+
+    @ExceptionHandler(value = Exception.class)
+    public String handleException(HttpServletRequest request, Exception ex) {
+        logger.info("exception occured : " + request.getRequestURL());
+        ex.printStackTrace();
+        return "final";
+    }
+
+    @ExceptionHandler(value = NullPointerException.class)
+    public String handleNull(HttpServletRequest request, Exception ex) {
+        logger.info("exception occured : " + request.getRequestURL());
+        ex.printStackTrace();
+        return "NullHandler";
+    }
 }

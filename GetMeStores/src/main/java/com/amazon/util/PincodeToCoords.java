@@ -17,34 +17,35 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
-public class PincodeToCoords
-{
-	 private Double lat,lon;
-	 private String pincode;
-	 public void getCoordinates() throws Exception
-	 {
-				String url = "https://nominatim.openstreetmap.org/search?q=";
-			     URL obj = new URL(url+pincode+"&format=json");
-			     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-			     int responseCode = con.getResponseCode();
+/*
+ * PincodeToCoords.java
+ * 
+ * This class converts pincode to lat-long with the use of an opensource API.
+ */
+public class PincodeToCoords {
+    private Double lat, lon;
+    private String pincode;
+    public void getCoordinates() throws Exception {
+        String url = "https://nominatim.openstreetmap.org/search?q=";
+        URL obj = new URL(url + pincode + "&format=json");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-			     BufferedReader in = new BufferedReader(
-			             new InputStreamReader(con.getInputStream()));
-			     String inputLine;
-			     StringBuffer response = new StringBuffer();
-			     while ((inputLine = in.readLine()) != null) {
-			     	response.append(inputLine);
-			     }
-			     in.close();
-			     
-			     JSONArray myresponse= new JSONArray(response.toString());
-			     JSONObject object = myresponse.getJSONObject(0);
-			     lat=Double.valueOf(object.getString("lat"));
-			     lon=Double.valueOf(object.getString("lon"));
-			     
-	}
+        int responseCode = con.getResponseCode();
+
+        BufferedReader in = new BufferedReader(
+            new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in .readLine()) != null) {
+            response.append(inputLine);
+        } in .close();
+
+        JSONArray myresponse = new JSONArray(response.toString());
+        JSONObject object = myresponse.getJSONObject(0);
+        lat = Double.valueOf(object.getString("lat"));
+        lon = Double.valueOf(object.getString("lon"));
+
+    }
 
 }
-
-

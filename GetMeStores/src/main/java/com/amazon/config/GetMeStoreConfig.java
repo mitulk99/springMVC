@@ -22,61 +22,48 @@ import com.amazon.Datastore.GetStoreDataES;
 import com.amazon.Datastore.GetStoreData;
 
 @Configuration
-@ComponentScan({ "com.amazon.*" })
+@ComponentScan({
+    "com.amazon.*"
+})
 public class GetMeStoreConfig {
-	
-	
-	@Bean
-	public NearByStore getimplt()
-	{
-		return new NearByStoreImplementation();
-	}
-	
-//	@Bean
-//	public NearByStore getinjected(DatabaseFactory factory, GetStoreData getStore)
-//	{
-//		return new NearByStoreImplementation(factory,getStore);
-//	}
-	
-//	@Bean
-//	public GetStoreData getstoreimplt()
-//	{
-//		return new GetStoreDataDDB();
-//	}
-	
-	@Bean
-	public GetStoreData getstoreimplt()
-	{
-		return new GetStoreDataES();
-	}
-	
-	@Bean
-	public RestHighLevelClient getmeClient()
-	{
-		return new RestHighLevelClient(RestClient.builder(new HttpHost("localhost",9200, "http")));
-	}
-	
-	@Bean
-	public SearchSourceBuilder getsearchBuilder()
-	{
-		return new SearchSourceBuilder();
-	}
-	
-	@Bean
-	public AWSCredentials getCredentials()
-	{
-		return new BasicAWSCredentials("SECRET_KEY", "ACCESS_KEY");
-	}
-	
-	@Bean
-	public AmazonDynamoDBClient getClient(AWSCredentials credentials)
-	{
-		return new AmazonDynamoDBClient(credentials);
-	}
-//	@Bean
-//	@Scope(value= "prorotype" )
-//	public DatabaseFactory getdatabse()
-//	{
-//		return new DatabaseFactory();
-//	}
+
+
+    @Bean
+    public NearByStore getimplt() {
+        return new NearByStoreImplementation();
+    }
+
+
+
+    //	@Bean
+    //	public GetStoreData getstoreimplt()
+    //	{
+    //		return new GetStoreDataDDB();
+    //	}
+
+    @Bean
+    public GetStoreData getstoreimplt() {
+        return new GetStoreDataES();
+    }
+
+    @Bean
+    public GetStoreDataES getES() {
+        return new GetStoreDataES();
+    }
+
+    @Bean
+    public GetStoreDataDDB getDDB() {
+        return new GetStoreDataDDB();
+    }
+
+    @Bean
+    public AWSCredentials getCredentials() {
+        return new BasicAWSCredentials("ACCESS_KEY", "SECRET_KEY");
+    }
+
+    @Bean
+    public AmazonDynamoDBClient getClient(AWSCredentials credentials) {
+        return new AmazonDynamoDBClient(credentials);
+    }
+
 }

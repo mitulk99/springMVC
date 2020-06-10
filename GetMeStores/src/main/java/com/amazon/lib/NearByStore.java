@@ -11,14 +11,14 @@ import com.amazon.Datastore.StoresDetails;
  * 
  */
 public interface NearByStore {
-	
-	/*
-	 * method getmeStore.
-	 * 
-	 * this method will convert ControllerTolibModel to libToDatastoreModel.
-	 * It should convert valid pincode to corresponding lat-long.
-	 * 
-	 */
-	public List<StoresDetails> nearbystore(final NearByStoreM model) throws Exception;
+
+    /*
+     * method getmeStore.
+     * 
+     * this method will convert ControllerTolibModel to libToDatastoreModel.
+     * It should convert valid pincode to corresponding lat-long.
+     * 
+     */
+    public List < StoresDetails > nearbystore(final NearByStoreM model) throws Exception;
 
 }

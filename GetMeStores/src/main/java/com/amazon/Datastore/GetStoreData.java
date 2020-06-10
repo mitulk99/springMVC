@@ -15,10 +15,10 @@ import com.amazon.lib.GetStoreDataM;
  * 
  */
 public interface GetStoreData {
-	
-	/*
-	 * this method will work with API to get StoresDetails from the database.
-	 */
-	public List<StoresDetails> getstoredata(final GetStoreDataM User) throws Exception;
+
+    /*
+     * this method will work with API to get StoresDetails from the database.
+     */
+    public List < StoresDetails > getstoredata(final GetStoreDataM User) throws Exception;
 
 }
