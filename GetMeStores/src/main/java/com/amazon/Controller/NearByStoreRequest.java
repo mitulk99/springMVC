@@ -33,4 +33,7 @@ public class NearByStoreRequest {
 
     @NotNull
     private String category;
+    
+    @NotNull(message="Please select one !!")
+    private String factory;
 }

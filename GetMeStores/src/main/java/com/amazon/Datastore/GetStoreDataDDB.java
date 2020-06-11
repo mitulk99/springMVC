@@ -1,5 +1,6 @@
 package com.amazon.Datastore;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.util.ArrayList;
@@ -27,10 +28,15 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 @Named
 public class GetStoreDataDDB implements GetStoreData {
 
-    private AWSCredentials credentials = new BasicAWSCredentials("SECRET_KEY", "ACCESS_KEY");
+    private AWSCredentials credentials;
 
-    private AmazonDynamoDBClient ddb = new AmazonDynamoDBClient(credentials);;
-
+    private AmazonDynamoDBClient ddb;
+    
+    @Inject
+    public GetStoreDataDDB(AmazonDynamoDBClient amazonDynamoDBClient, AWSCredentials aWSCredentials ) {
+		this.credentials=aWSCredentials;
+		this.ddb=amazonDynamoDBClient;
+	}
     public List < StoresDetails > getstoredata(final NearByStore User) throws Exception {
 
         List < StoresDetails > details = new ArrayList < StoresDetails > ();

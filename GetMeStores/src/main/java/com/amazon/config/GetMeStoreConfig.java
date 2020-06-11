@@ -2,6 +2,12 @@ package com.amazon.config;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +20,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazon.Datastore.GetStoreDataDDB;
 import com.amazon.Datastore.GetStoreDataES;
+import com.amazon.Datastore.StoresDetails;
 import com.amazon.Datastore.GetStoreData;
 
 @Configuration
@@ -51,13 +58,19 @@ public class GetMeStoreConfig {
 //        return new GetStoreDataDDB();
 //    }
 
+	@Bean
+	public RestHighLevelClient restHighLevelClient()
+	{
+		return new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
+	}
+	
     @Bean
-    public AWSCredentials getCredentials() {
-        return new BasicAWSCredentials("ACCESS_KEY", "SECRET_KEY");
+    public AWSCredentials aWSCredentials() {
+        return new BasicAWSCredentials("AKIAXIEUBBVBKSFN7KHL", "MF2x/YWjdSpbrXZhhn9aiW75X7cPiZl8o6CqdEbp");
     }
-
+    
     @Bean
-    public AmazonDynamoDBClient getClient(AWSCredentials credentials) {
+    public AmazonDynamoDBClient amazonDynamoDBClient(AWSCredentials credentials) {
         return new AmazonDynamoDBClient(credentials);
     }
 

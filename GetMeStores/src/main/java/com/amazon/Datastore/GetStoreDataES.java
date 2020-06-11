@@ -1,5 +1,6 @@
 package com.amazon.Datastore;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.util.ArrayList;
@@ -35,26 +36,25 @@ import com.amazon.lib.NearByStore;
 @Named
 public class GetStoreDataES implements GetStoreData {
 
+	/*
+     * Use of RestHighLevelClient to connect our java client with elasticsearch.
+     * 
+     * RestHighLevelClient is used instead of ES java API, since ES is planning to deprecate
+     * ES java API in it's future version.
+     * 
+     */
+    private RestHighLevelClient client;
 
-    private RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
-
-
+    @Inject
+    public GetStoreDataES(RestHighLevelClient restHighLevelClient) {
+		this.client=restHighLevelClient;
+	}
+    
     public List < StoresDetails > getstoredata(final NearByStore User) throws Exception {
 
 
         List < StoresDetails > details = new ArrayList < StoresDetails > ();
-
-        /*
-         * Use of RestHighLevelClient to connect our java client with elasticsearch.
-         * 
-         * RestHighLevelClient is used instead of ES java API, since ES is planning to deprecate
-         * ES java API in it's future version.
-         * 
-         */
-
-
         SearchRequest searchRequest = new SearchRequest("my_locations");
-
 
         /*
          * here I am building a geoDistance query.

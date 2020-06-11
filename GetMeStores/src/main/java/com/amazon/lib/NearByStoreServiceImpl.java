@@ -59,7 +59,7 @@ public class NearByStoreServiceImpl implements NearByStoreService {
             .category(model.getCategory())
             .build();
 
-        List < StoresDetails > storedetails = getStoreDataFactory.getInstance("ES").getstoredata(object);
+        List < StoresDetails > storedetails = getStoreDataFactory.getInstance(model.getFactory()).getstoredata(object);
 
         return storedetails;
     }
