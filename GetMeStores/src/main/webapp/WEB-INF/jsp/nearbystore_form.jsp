@@ -2,7 +2,7 @@
 <html>
 <h2> Enter details here...</h2>
 <body>
-<form:form action="nearbystore" method="post" modelAttribute="user">
+<form:form action="nearbystore" method="post" modelAttribute="nearByStoreRequest">
 Enter your pincode : <form:input path="pincode"/><br>
 		<form:errors path="pincode"  cssClass="text-danger"/><br><br>
 Enter radius in KM : <form:input path="radius"/><br>

@@ -1,1 +1,6 @@
+../.idea/
 /target/
+*.iml
+.gitignore
+./idea
+.idea/

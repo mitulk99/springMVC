@@ -1,22 +1,17 @@
 package com.amazon.lib;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
-
-import com.amazon.Controller.NearByStoreM;
+import com.amazon.Controller.NearByStoreRequest;
 import com.amazon.Datastore.GetStoreData;
 import com.amazon.Datastore.StoresDetails;
-import com.amazon.config.GetMeStoreConfig;
-import com.amazon.util.DatabaseFactory;
+import com.amazon.Datastore.GetStoreDataFactory;
 import com.amazon.util.PincodeToCoords;
 
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 
 /*
@@ -26,14 +21,21 @@ import lombok.NonNull;
  * It uses @param PincodeToCoords to convert pincode to coordinates
  */
 @NoArgsConstructor
-public class NearByStoreImplementation implements NearByStore {
+@Named
+public class NearByStoreServiceImpl implements NearByStoreService {
 
 
-    DatabaseFactory factory = new DatabaseFactory();
-    //	
-    //	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
-    GetStoreData getStore = factory.getInstance("ES");
+//    GetStoreDataFactory factory = new GetStoreDataFactory();
+//    //
+//    //	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
+//    GetStoreData getStore = factory.getInstance("ES");
 
+    GetStoreDataFactory getStoreDataFactory;
+
+    @Inject
+    NearByStoreServiceImpl(GetStoreDataFactory getStoreDataFactory){
+        this.getStoreDataFactory = getStoreDataFactory;
+    }
 
 
     /*
@@ -42,7 +44,7 @@ public class NearByStoreImplementation implements NearByStore {
      * 
      * @return List<StoresDetails> - It will return list of all the stores.
      */
-    public List < StoresDetails > nearbystore(NearByStoreM model) throws Exception {
+    public List < StoresDetails > nearbystore(NearByStoreRequest model) throws Exception {
 
         final PincodeToCoords pincodetocoords = PincodeToCoords.builder()
             .pincode(model.getPincode())
@@ -50,14 +52,14 @@ public class NearByStoreImplementation implements NearByStore {
 
         pincodetocoords.getCoordinates();
 
-        GetStoreDataM object = GetStoreDataM.builder()
+        NearByStore object = NearByStore.builder()
             .lat(pincodetocoords.getLat())
             .lon(pincodetocoords.getLon())
             .radius(model.getRadius())
             .category(model.getCategory())
             .build();
 
-        List < StoresDetails > storedetails = getStore.getstoredata(object);
+        List < StoresDetails > storedetails = getStoreDataFactory.getInstance("ES").getstoredata(object);
 
         return storedetails;
     }

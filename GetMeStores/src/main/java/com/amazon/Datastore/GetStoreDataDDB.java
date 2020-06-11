@@ -1,14 +1,12 @@
 package com.amazon.Datastore;
 
+import javax.inject.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
-import org.springframework.stereotype.Component;
-
-import com.amazon.lib.GetStoreDataM;
+import com.amazon.lib.NearByStore;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.geo.GeoDataManager;
@@ -26,14 +24,14 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
  * with the use of Geo-library of DDb.
  * 
  */
-
+@Named
 public class GetStoreDataDDB implements GetStoreData {
 
     private AWSCredentials credentials = new BasicAWSCredentials("SECRET_KEY", "ACCESS_KEY");
 
     private AmazonDynamoDBClient ddb = new AmazonDynamoDBClient(credentials);;
 
-    public List < StoresDetails > getstoredata(final GetStoreDataM User) throws Exception {
+    public List < StoresDetails > getstoredata(final NearByStore User) throws Exception {
 
         List < StoresDetails > details = new ArrayList < StoresDetails > ();
 

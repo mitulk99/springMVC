@@ -2,7 +2,7 @@ package com.amazon.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class Mywebinit extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class GetMeStoreWebinit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class < ? > [] getRootConfigClasses() {

@@ -1,9 +1,9 @@
 package com.amazon.Datastore;
 
+import javax.inject.Named;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.search.SearchRequest;
@@ -22,9 +22,8 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
 
-import com.amazon.lib.GetStoreDataM;
+import com.amazon.lib.NearByStore;
 
 /*
  * GetStoreDataES.java
@@ -33,14 +32,14 @@ import com.amazon.lib.GetStoreDataM;
  * with the use of geo-ditance query.
  * 
  */
-
+@Named
 public class GetStoreDataES implements GetStoreData {
 
 
     private RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
 
 
-    public List < StoresDetails > getstoredata(final GetStoreDataM User) throws Exception {
+    public List < StoresDetails > getstoredata(final NearByStore User) throws Exception {
 
 
         List < StoresDetails > details = new ArrayList < StoresDetails > ();

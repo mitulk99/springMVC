@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NearByStoreM {
+public class NearByStoreRequest {
 
     @NotBlank(message = "pincode field cannot be empty !! Please enter Pincode. ")
     @Size(min = 6, max = 6, message = "Indian pincode should consist of 6 digits!!")

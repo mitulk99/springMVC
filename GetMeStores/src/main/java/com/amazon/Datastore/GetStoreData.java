@@ -2,7 +2,7 @@ package com.amazon.Datastore;
 
 import java.util.List;
 
-import com.amazon.lib.GetStoreDataM;
+import com.amazon.lib.NearByStore;
 /*
  * GetStoreData.java
  * 
@@ -19,6 +19,6 @@ public interface GetStoreData {
     /*
      * this method will work with API to get StoresDetails from the database.
      */
-    public List < StoresDetails > getstoredata(final GetStoreDataM User) throws Exception;
+    public List < StoresDetails > getstoredata(final NearByStore User) throws Exception;
 
 }

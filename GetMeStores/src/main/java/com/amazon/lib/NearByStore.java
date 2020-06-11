@@ -1,24 +1,22 @@
 package com.amazon.lib;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import com.amazon.Controller.NearByStoreM;
-import com.amazon.Datastore.StoresDetails;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class NearByStore {
 
-/*
- * NearByStore.java
- * interface which has only method getmeStore.
- * 
- */
-public interface NearByStore {
-
-    /*
-     * method getmeStore.
-     * 
-     * this method will convert ControllerTolibModel to libToDatastoreModel.
-     * It should convert valid pincode to corresponding lat-long.
-     * 
-     */
-    public List < StoresDetails > nearbystore(final NearByStoreM model) throws Exception;
-
+	private Double lat;
+	
+	private Double lon;
+	
+	private Double radius;
+	
+	private String category;
+	
 }
