@@ -77,9 +77,12 @@ public class GetStoreDataES implements GetStoreData {
 						                 .point(User.getLat(), User.getLon())
 						                 .distance(User.getRadius(), DistanceUnit.KILOMETERS)
 						                 .geoDistance(GeoDistance.ARC);
-      
+        QueryBuilder queryTerm=QueryBuilders
+        			.termsQuery("category.keyword", "electronics", "QSR", "garments", "Dairy", "grocery");
+        
         QueryBuilder completeQuery=QueryBuilders
         		.boolQuery()
+        		.must(queryTerm)
         		.filter(geoDistanceQueryBuilder);
 
         searchSourceBuilder.query(completeQuery);
@@ -100,6 +103,7 @@ public class GetStoreDataES implements GetStoreData {
         /*
          * parsing fetched Json data to make it compatible with StoresDetails Model.
          */
+        System.out.println(searchHits.length);
         for (SearchHit hit: searchHits) {
             JSONObject obj1 = new JSONObject(hit.toString());
             JSONArray obj2 = obj1.getJSONArray("sort");
