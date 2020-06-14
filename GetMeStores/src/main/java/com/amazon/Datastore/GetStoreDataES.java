@@ -77,8 +77,17 @@ public class GetStoreDataES implements GetStoreData {
 						                 .point(User.getLat(), User.getLon())
 						                 .distance(User.getRadius(), DistanceUnit.KILOMETERS)
 						                 .geoDistance(GeoDistance.ARC);
-        QueryBuilder queryTerm=QueryBuilders
+        QueryBuilder queryTerm;
+        if(User.getCategory().equals(Constants.ALL))
+        {
+        	 queryTerm=QueryBuilders
         			.termsQuery("category.keyword", "electronics", "QSR", "garments", "Dairy", "grocery");
+        }
+        else
+        {
+        	 queryTerm=QueryBuilders
+        			.termQuery("category.keyword", User.getCategory());
+        }
         
         QueryBuilder completeQuery=QueryBuilders
         		.boolQuery()
@@ -108,7 +117,7 @@ public class GetStoreDataES implements GetStoreData {
             JSONObject obj1 = new JSONObject(hit.toString());
             JSONArray obj2 = obj1.getJSONArray("sort");
             obj1 = obj1.getJSONObject("_source");
-            if (obj1.get(Constants.STORE_CATEGORY).equals(User.getCategory()) || User.getCategory().equals(Constants.ALL)) {
+         
                 StoresDetails sd = StoresDetails.builder().build();
                 sd.setMerchantname(obj1.get(Constants.MERCHANT_NAME).toString());
                 sd.setOpentime(obj1.get(Constants.OPEN_TIME).toString());
@@ -119,7 +128,6 @@ public class GetStoreDataES implements GetStoreData {
                     sd.setRangeofhomedelivery(obj1.get(Constants.RANGE_OF_DELIVERY).toString());
                 sd.setDistance(obj2.getDouble(0));
                 details.add(sd);
-            }
         }
         return details;
     }
