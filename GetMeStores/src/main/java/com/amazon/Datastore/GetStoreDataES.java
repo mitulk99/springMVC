@@ -14,6 +14,8 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.unit.DistanceUnit;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
@@ -25,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.amazon.lib.NearByStore;
+import com.amazon.util.Constants;
 
 /*
  * GetStoreDataES.java
@@ -54,7 +57,7 @@ public class GetStoreDataES implements GetStoreData {
 
 
         List < StoresDetails > details = new ArrayList < StoresDetails > ();
-        SearchRequest searchRequest = new SearchRequest("my_locations");
+        SearchRequest searchRequest = new SearchRequest(Constants.INDEX_NAME);
 
         /*
          * here I am building a geoDistance query.
@@ -69,16 +72,22 @@ public class GetStoreDataES implements GetStoreData {
          */
         //System.out.println("hello");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders
-            .geoDistanceQuery("location")
-            .point(User.getLat(), User.getLon())
-            .distance(User.getRadius(), DistanceUnit.KILOMETERS)
-            .geoDistance(GeoDistance.ARC));
+        QueryBuilder geoDistanceQueryBuilder=QueryBuilders
+						        		 .geoDistanceQuery(Constants.GEO_POINT_FIELD)
+						                 .point(User.getLat(), User.getLon())
+						                 .distance(User.getRadius(), DistanceUnit.KILOMETERS)
+						                 .geoDistance(GeoDistance.ARC);
+      
+        QueryBuilder completeQuery=QueryBuilders
+        		.boolQuery()
+        		.filter(geoDistanceQueryBuilder);
 
+        searchSourceBuilder.query(completeQuery);
+           
         /*
          * This particular line of code is for sorting Stores based on distance from CenterPoint.
          */
-        searchRequest.source(searchSourceBuilder.sort(SortBuilders.geoDistanceSort("location", User.getLat(), User.getLon()).order(SortOrder.ASC).unit(DistanceUnit.KILOMETERS)));
+        searchRequest.source(searchSourceBuilder.sort(SortBuilders.geoDistanceSort(Constants.GEO_POINT_FIELD, User.getLat(), User.getLon()).order(SortOrder.ASC).unit(DistanceUnit.KILOMETERS)));
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
         /*
@@ -91,20 +100,19 @@ public class GetStoreDataES implements GetStoreData {
         /*
          * parsing fetched Json data to make it compatible with StoresDetails Model.
          */
-
         for (SearchHit hit: searchHits) {
             JSONObject obj1 = new JSONObject(hit.toString());
             JSONArray obj2 = obj1.getJSONArray("sort");
             obj1 = obj1.getJSONObject("_source");
-            if (obj1.get("category").equals(User.getCategory()) || User.getCategory().equals("all") == true) {
+            if (obj1.get(Constants.STORE_CATEGORY).equals(User.getCategory()) || User.getCategory().equals(Constants.ALL)) {
                 StoresDetails sd = StoresDetails.builder().build();
-                sd.setMerchantname(obj1.get("merchant name").toString());
-                sd.setOpentime(obj1.get("open time").toString());
-                sd.setClosetime(obj1.get("close time").toString());
-                sd.setAddress(obj1.get("address").toString());
-                sd.setCategory(obj1.get("category").toString());
-                if (obj1.has("home delivery") == true)
-                    sd.setRangeofhomedelivery(obj1.get("range of home delivery").toString());
+                sd.setMerchantname(obj1.get(Constants.MERCHANT_NAME).toString());
+                sd.setOpentime(obj1.get(Constants.OPEN_TIME).toString());
+                sd.setClosetime(obj1.get(Constants.CLOSE_TIME).toString());
+                sd.setAddress(obj1.get(Constants.ADDRESS).toString());
+                sd.setCategory(obj1.get(Constants.STORE_CATEGORY).toString());
+                if (obj1.has(Constants.HOME_DELIVERY))
+                    sd.setRangeofhomedelivery(obj1.get(Constants.RANGE_OF_DELIVERY).toString());
                 sd.setDistance(obj2.getDouble(0));
                 details.add(sd);
             }

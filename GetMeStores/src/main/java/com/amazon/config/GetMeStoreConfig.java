@@ -66,7 +66,7 @@ public class GetMeStoreConfig {
 	
     @Bean
     public AWSCredentials aWSCredentials() {
-        return new BasicAWSCredentials("AKIAXIEUBBVBKSFN7KHL", "MF2x/YWjdSpbrXZhhn9aiW75X7cPiZl8o6CqdEbp");
+        return new BasicAWSCredentials("AKIAXIEUBBVBMYCDZXV7", "IwMmYQkJFtXEC7SVhwGk/5eLd1CBNJ18Z5n1FMU1");
     }
     
     @Bean

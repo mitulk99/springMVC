@@ -52,7 +52,7 @@ public class NearByStoreController {
      *
      * @return "formTosubmit" will take you to form page
      */
-    @RequestMapping(value = Constants.UI_GetMeStores, method = RequestMethod.GET)
+    @RequestMapping(value = Constants.URL_NEARBYSTORES, method = RequestMethod.GET)
     public String display(Model model) {
         final NearByStoreRequest nearByStoreRequest = NearByStoreRequest.builder().build();
 
@@ -71,7 +71,7 @@ public class NearByStoreController {
      * else proceed further to retrive storeDetails from the database.
      *
      */
-    @RequestMapping(value = Constants.UI_GetMeStores, method = RequestMethod.POST)
+    @RequestMapping(value = Constants.URL_NEARBYSTORES, method = RequestMethod.POST)
     public String submit(
             @Valid @ModelAttribute final NearByStoreRequest nearByStoreRequest, BindingResult errors, Model model) throws Exception {
         if (errors.hasErrors())
@@ -85,7 +85,7 @@ public class NearByStoreController {
          * and ask re-entering details.
          *
          */
-        if (storedetails.size() == 0)
+        if (storedetails.isEmpty())
             return "nostores";
 
         model.addAttribute("details", storedetails);
