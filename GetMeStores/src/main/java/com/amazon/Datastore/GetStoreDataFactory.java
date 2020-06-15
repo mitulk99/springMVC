@@ -11,8 +11,8 @@ import com.amazon.Datastore.GetStoreDataES;
 @Named
 public class GetStoreDataFactory {
 
-	GetStoreDataES getStoreDataES;
-	GetStoreDataDDB getStoreDataDDB;
+	private final GetStoreDataES getStoreDataES;
+	private final GetStoreDataDDB getStoreDataDDB;
 
 	@Inject
 	GetStoreDataFactory(GetStoreDataDDB getStoreDataDDB, GetStoreDataES getStoreDataES){

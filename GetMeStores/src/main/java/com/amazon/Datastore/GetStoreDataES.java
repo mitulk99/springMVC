@@ -42,8 +42,8 @@ public class GetStoreDataES implements GetStoreData {
 	/*
      * Use of RestHighLevelClient to connect our java client with elasticsearch.
      * 
-     * RestHighLevelClient is used instead of ES java API, since ES is planning to deprecate
-     * ES java API in it's future version.
+     * RestHighLevelClient is used instead of ES transportClient, since ES is planning to deprecate
+     * transportClient in it's future version.
      * 
      */
     private RestHighLevelClient client;
@@ -70,7 +70,6 @@ public class GetStoreDataES implements GetStoreData {
          *  .distance(User.getRadius(), DistanceUnit.KILOMETERS) - search for the Stores within radius given here in KM.
          * 
          */
-        //System.out.println("hello");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         QueryBuilder geoDistanceQueryBuilder=QueryBuilders
 						        		 .geoDistanceQuery(Constants.GEO_POINT_FIELD)
@@ -112,7 +111,6 @@ public class GetStoreDataES implements GetStoreData {
         /*
          * parsing fetched Json data to make it compatible with StoresDetails Model.
          */
-        System.out.println(searchHits.length);
         for (SearchHit hit: searchHits) {
             JSONObject obj1 = new JSONObject(hit.toString());
             JSONArray obj2 = obj1.getJSONArray("sort");

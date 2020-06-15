@@ -20,7 +20,7 @@ import com.amazon.util.Constants;
 
 
 /*
- * <h1>Store Controller</h1>
+ * <h1>NearByStoreController</h1>
  * It's a front Controller for our Spring MVC app.
  *
  */
@@ -48,9 +48,9 @@ public class NearByStoreController {
      * he/she wants to be retrieved
      *
      * Lombok - builder pattern has been used to make code more readable and clear.
-     * @param ControllerTolibModel is being binded to model.
+     * @param NearbyStoreRequest is being binded to model.
      *
-     * @return "formTosubmit" will take you to form page
+     * @return "nearbystore_form" will take you to form page
      */
     @RequestMapping(value = Constants.URL_NEARBYSTORES, method = RequestMethod.GET)
     public String display(Model model) {
@@ -66,7 +66,7 @@ public class NearByStoreController {
      * User entered details will be passed to this method,
      * then it will be validated with constraints from it's model class.
      *
-     * if any validation error, then @return "formTosubmit" - same form again with messages.
+     * if any validation error, then @return "nearbystore_form" - same form again with messages.
      *
      * else proceed further to retrive storeDetails from the database.
      *

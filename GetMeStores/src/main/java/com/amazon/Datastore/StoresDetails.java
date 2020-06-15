@@ -13,11 +13,17 @@ import lombok.Setter;
 public class StoresDetails {
 	
 	private String merchantname;
+	
 	private String opentime;
+	
 	private String closetime;
+	
 	private String address;
+	
 	private String rangeofhomedelivery;
+	
 	private Double distance;
+	
 	private String category;
 	
 }

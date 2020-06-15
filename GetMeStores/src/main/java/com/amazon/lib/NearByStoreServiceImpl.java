@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
  * This class implements NearByStore.java
  * It uses @param PincodeToCoords to convert pincode to coordinates
  */
-@NoArgsConstructor
+
 @Named
 public class NearByStoreServiceImpl implements NearByStoreService {
 
@@ -30,7 +30,7 @@ public class NearByStoreServiceImpl implements NearByStoreService {
 //    //	// "ES" for Elasticsearch implementation, other than "ES" for DynamoDB implementation.
 //    GetStoreData getStore = factory.getInstance("ES");
 
-    GetStoreDataFactory getStoreDataFactory;
+    private final GetStoreDataFactory getStoreDataFactory;
 
     @Inject
     NearByStoreServiceImpl(GetStoreDataFactory getStoreDataFactory){

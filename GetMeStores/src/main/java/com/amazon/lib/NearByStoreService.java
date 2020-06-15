@@ -6,16 +6,16 @@ import com.amazon.Controller.NearByStoreRequest;
 import com.amazon.Datastore.StoresDetails;
 
 /*
- * NearByStore.java
- * interface which has only method getmeStore.
+ * NearByStoreService.java
+ * interface which has only method nearbystore.
  * 
  */
 public interface NearByStoreService {
 
     /*
-     * method getmeStore.
+     * method nearbystore.
      * 
-     * this method will convert ControllerTolibModel to libToDatastoreModel.
+     * this method will convert NearByStoreRequest to NearByStore.
      * It should convert valid pincode to corresponding lat-long.
      * 
      */

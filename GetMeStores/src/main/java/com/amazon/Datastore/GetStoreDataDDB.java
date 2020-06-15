@@ -68,7 +68,6 @@ public class GetStoreDataDDB implements GetStoreData {
         QueryRadiusRequest queryRadiusRequest = new QueryRadiusRequest(centerPoint, User.getRadius() * 1000);
         QueryRadiusResult queryRadiusResult = geoDataManager.queryRadius(queryRadiusRequest);
         List < Map < String, AttributeValue >> queryResults = queryRadiusResult.getItem();
-
         /*
          * Parsing data retrived from "geo-test" table to make compatible with StoresDetails Model.
          */
